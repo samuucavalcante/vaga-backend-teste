@@ -5,6 +5,9 @@
   "repository": "https://github.com/samuucavalcante/vaga-backend-teste",
   "author": "Samuel Cavalcante <samuel-icm-dantas@hotmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.27",
