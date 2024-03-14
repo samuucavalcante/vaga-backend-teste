@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { CreatePokemonDto } from "../dto/create-pokemon.dto";
+import { CreatePokemonDto } from "dto/create-pokemon.dto";
 
 export class CreatePokemon {
   constructor(private readonly prismaService: PrismaClient) { }
