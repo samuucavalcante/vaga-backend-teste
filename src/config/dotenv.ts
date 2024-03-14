@@ -1,4 +1,5 @@
 import { z } from "zod";
+import "dotenv/config";
 
 const dotenvSchema = z.object({
   BACKEND_PORT: z.string().transform((bp) => +bp),
