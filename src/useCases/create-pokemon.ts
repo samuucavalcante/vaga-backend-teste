@@ -16,7 +16,6 @@ export class CreatePokemon {
       });
     }
 
-    // Criar o Pokémon
     const pokemon = await this.prismaService.pokemon.create({
       data: {
         ...pokemonData,

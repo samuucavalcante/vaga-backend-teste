@@ -8,7 +8,7 @@
   "scripts": {
     "infra:up": "docker-compose up -d postgres_main && sleep 1 && yarn prisma db push",
     "infra:down": "docker-compose down",
-    "dev": "tsx watch src/server.ts",
+    "dev": "tsx watch src/cluster.ts",
     "test": "yarn infra:down && yarn pre:test && sleep 1 && yarn prisma db push && vitest --run || yarn post:test",
     "pre:test": "docker-compose up -d postgres_test",
     "post:test": "docker-compose down "
