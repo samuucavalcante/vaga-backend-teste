@@ -24,7 +24,7 @@ export class CreatePokemon {
         status: {
           connectOrCreate: {
             where: {
-              pokemonId: pokemonData.id,
+              pokemonId: status.id,
             },
             create: {
               atk: status.atk,
