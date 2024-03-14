@@ -1,8 +1,11 @@
 import express from "express";
 import { dotenv } from "config/dotenv";
-const app = express();
+import { appRoutes } from "./routes";
+export const app = express();
 
 app.use(express.json());
+
+app.use(appRoutes);
 
 app.listen(dotenv.BACKEND_PORT, () =>
 	console.log(
