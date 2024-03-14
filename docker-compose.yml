@@ -1,8 +1,8 @@
 version: "3"
 services:
-  postgres:
+  postgres_main:
     image: "postgres"
-    container_name: "postgres_database"
+    container_name: "postgres_main"
     environment:
       POSTGRES_DB: ${POSTGRES_NAME}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -10,5 +10,13 @@ services:
       ALLOW_IP_RANGE: "0.0.0.0/0"
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
-volumes:
-  rabbitmq-data: {}
+  postgres_test:
+    image: "postgres"
+    container_name: "postgres_test"
+    environment:
+      POSTGRES_DB: ${POSTGRES_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      ALLOW_IP_RANGE: "0.0.0.0/0"
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
