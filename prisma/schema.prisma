@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pokemon {
+  id             Int         @id @default(autoincrement())
+  name           String      @unique
+  imgName        String      @map("img_name")
+  generation     Generation
+  evolutionStage Evolution   @map("evolution_stage")
+  evolved        Boolean
+  crossGen       Boolean     @map("cross_generation")
+  type1          PokemonType
+  type2          PokemonType
+  weather1       Weather
+  weather2       Weather
+  legendary      Boolean
+  aquireable     String      @db.Char()
+  spawns         Boolean
+  regional       Boolean
+  raidable       String      @db.Char()
+  hatchable      String      @db.VarChar(2)
+  shiny          Boolean
+  nest           Boolean
+  new            Boolean
+  notGettable    Boolean     @map("not_gettable")
+  futureEvolve   Boolean     @map("future_evolve")
+  cp40           Int         @db.SmallInt
+  cp39           Int         @db.SmallInt
+
+  family   Family  @relation(fields: [familyId], references: [id])
+  familyId Int     @map("family_id")
+  status   Status?
+
+  @@index([name])
+  @@map("pokemon")
+}
+
+model Family {
+  id      Int       @id @default(autoincrement())
+  Pokemon Pokemon[]
+
+  @@map("family")
+}
+
+model Status {
+  id Int @id @default(autoincrement())
+
+  atk Int @db.SmallInt()
+  def Int @db.SmallInt()
+  sta Int @db.SmallInt()
+
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+  pokemonId Int     @unique
+}
+
+enum PokemonType {
+  grass
+  fire
+  water
+  bug
+  normal
+  poison
+  electric
+  ground
+  fairy
+  psychic
+  fighting
+  rock
+  ghost
+  ice
+  dragon
+  steel
+  dark
+  flying
+}
+
+enum Generation {
+  one
+  two
+  tree
+  four
+  five
+  six
+  seven
+}
+
+enum Weather {
+  SunnyClear
+  Rainy
+  PartlyCloudy
+  Cloudy
+  Windy
+  Fog
+  Snow
+}
+
+enum Evolution {
+  one
+  two
+  tree
+}
