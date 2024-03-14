@@ -1,0 +1,27 @@
+Arguments: 
+  /home/samuucavalcante/.nvm/versions/node/v21.6.2/bin/node /usr/share/yarn/bin/yarn.js add typescript @types/node tsx @types/express prisma -D
+
+PATH: 
+  /opt/apache-maven-3.6.3/bin:/opt/jdk-13.0.1/bin:/home/samuucavalcante/.gvm/bin:/home/samuucavalcante/.console-ninja/.bin:/home/samuucavalcante/.local/share/nvim/mason/bin:/snap/nvim/2819/usr/sbin:/snap/nvim/2819/usr/bin:/snap/nvim/2819/sbin:/snap/nvim/2819/bin:/home/samuucavalcante/.sdkman/candidates/maven/current/bin:/home/samuucavalcante/.sdkman/candidates/java/current/bin:/opt/apache-maven-3.6.3/bin:/opt/jdk-13.0.1/bin:/home/samuucavalcante/.nvm/versions/node/v21.6.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  21.6.2
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: getaddrinfo EAI_AGAIN registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:118:26)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
