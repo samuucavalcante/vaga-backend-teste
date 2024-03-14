@@ -1,0 +1,14 @@
+version: "3"
+services:
+  postgres:
+    image: "postgres"
+    container_name: "postgres_database"
+    environment:
+      POSTGRES_DB: ${POSTGRES_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      ALLOW_IP_RANGE: "0.0.0.0/0"
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+volumes:
+  rabbitmq-data: {}
