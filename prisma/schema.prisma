@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Pokemon {
-  id             Int         @id @default(autoincrement())
+  id             Int         @id
   name           String      @unique
   imgName        String      @map("img_name")
   generation     Generation
@@ -39,10 +39,9 @@ model Pokemon {
   cp40           Int         @db.SmallInt
   cp39           Int         @db.SmallInt
 
-  family   Family @relation(fields: [familyId], references: [id])
-  familyId Int    @map("family_id")
-  status   Status @relation(fields: [statusId], references: [id])
-  statusId Int
+  family   Family  @relation(fields: [familyId], references: [id])
+  familyId Int     @map("family_id")
+  status   Status?
 
   @@index([name])
   @@map("pokemon")
@@ -62,8 +61,8 @@ model Status {
   def Int @db.SmallInt()
   sta Int @db.SmallInt()
 
-  pokemonId Int       @unique
-  Pokemon   Pokemon[]
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+  pokemonId Int     @unique @map("pokemon_id")
 }
 
 enum PokemonType {

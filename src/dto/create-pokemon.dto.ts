@@ -1,6 +1,6 @@
-import { Prisma } from "@prisma/client";
+import { Family, Pokemon, Prisma, Status } from "@prisma/client";
 
-export type CreatePokemonDto = Prisma.PokemonCreateInput & {
-  status: Prisma.StatusCreateInput;
-  familyId: number;
+export type CreatePokemonDto = Omit<Pokemon, "statusId" | "familyId"> & {
+  status: Status;
+  family: Family;
 };

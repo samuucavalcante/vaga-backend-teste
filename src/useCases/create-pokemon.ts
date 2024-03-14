@@ -1,23 +1,41 @@
 import { PrismaClient } from "@prisma/client";
-import { type CreatePokemonDto } from "../dto/create-pokemon.dto";
+import { CreatePokemonDto } from "../dto/create-pokemon.dto";
 
 export class CreatePokemon {
   constructor(private readonly prismaService: PrismaClient) { }
 
   public async execute(createPokemonDto: CreatePokemonDto) {
-    const { status, familyId, ...pokemon } = createPokemonDto;
+    const { status, family, ...pokemonData } = createPokemonDto;
 
     const familyExists = await this.prismaService.family.findUnique({
-      where: { id: familyId },
+      where: { id: family.id },
     });
+    if (!familyExists) {
+      await this.prismaService.family.create({
+        data: { id: family.id },
+      });
+    }
 
-    if (!familyExists) await this.prismaService.family.create({});
-
-    return await this.prismaService.pokemon.create({
+    // Criar o Pokémon
+    const pokemon = await this.prismaService.pokemon.create({
       data: {
-        ...pokemon,
-        status,
+        ...pokemonData,
+        familyId: family.id,
+        status: {
+          connectOrCreate: {
+            where: {
+              pokemonId: pokemonData.id,
+            },
+            create: {
+              atk: status.atk,
+              sta: status.sta,
+              def: status.def,
+            },
+          },
+        },
       },
     });
+
+    return pokemon;
   }
 }
