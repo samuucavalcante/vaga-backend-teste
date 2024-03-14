@@ -6,6 +6,8 @@
   "author": "Samuel Cavalcante <samuel-icm-dantas@hotmail.com>",
   "license": "MIT",
   "scripts": {
+    "infra:up": "docker-compose up -d && sleep 1 && yarn prisma db push",
+    "infra:down": "docker-compose down",
     "dev": "tsx watch src/server.ts"
   },
   "devDependencies": {
