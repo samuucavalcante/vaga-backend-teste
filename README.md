@@ -7,6 +7,16 @@
 
 <code>yarn start</code>
 
+## Rotas (EndPoint)
+
+### Paginação
+
+<code>HTTP GET /pokemons</code>
+
+### Importação Xlsx
+
+<code>HTTP POST /pokemons/xlsx</code>
+
 # Teste de Backend
 
 Olá Dev! Tudo bem?

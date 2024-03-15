@@ -13,12 +13,12 @@ describe("Vaga Backend Teste", async () => {
     );
 
     const response = await request(app)
-      .post(`/pokemon/import-xlsx`)
+      .post(`/pokemons/import-xlsx`)
       .attach("file", pokemonFilePath);
   });
 
   it("should be paginate pokemon", async () => {
-    const response = await request(app).get(`/pokemon`).expect(200);
+    const response = await request(app).get(`/pokemons`).expect(200);
 
     expect(response.body.data).toBeDefined();
     expect(response.body.total).toBeDefined();
