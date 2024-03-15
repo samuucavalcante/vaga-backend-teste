@@ -9,6 +9,7 @@
     "infra:up": "docker-compose up -d postgres_main -d redis && sleep 1 && yarn prisma db push",
     "infra:down": "docker-compose down",
     "infra:reset": "yarn infra:down && yarn infra:up",
+    "start": "yarn infra:up && yarn dev || yarn infra:down",
     "dev": "yarn tsx ./src/cluster.ts",
     "test": "yarn infra:down && yarn pre:test && sleep 1 && yarn prisma db push && vitest --run --dir ./test/integrations || yarn post:test",
     "test:e2e": "yarn pretest:e2e && vitest --run --dir ./test/e2e/ && yarn posttest:e2e || yarn posttest:e2e",
