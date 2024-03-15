@@ -15,7 +15,7 @@
 
 ### Importação Xlsx
 
-<code>HTTP POST /pokemons/xlsx</code>
+<code>HTTP POST /pokemons/import-xlsx</code>
 
 # Teste de Backend
 
