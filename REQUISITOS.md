@@ -11,4 +11,4 @@
 2. Usar http client express
 3. Usar Vitest para testes e2e & integração
 4. Usar a biblioteca bull para lidar com concorrência em NodeJs
-5. Criar varios paralelismo na thread de filas com lib nativa cluster
+5. Criar paralelismo na thread de filas com lib nativa cluster
