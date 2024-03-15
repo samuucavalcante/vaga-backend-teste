@@ -1,3 +1,12 @@
+# Requisitos
+
+- Docker
+- NodeJS v21
+
+## Inicialização rápida
+
+<code>yarn start</code>
+
 # Teste de Backend
 
 Olá Dev! Tudo bem?
