@@ -14,6 +14,10 @@ export class PokemonController {
     if (!request.file) return;
     const file = new FileStream(request.file);
 
-    file.xlsxToJson<Pokemon>((data) => this.queue.add("create-pokemon", data));
+    for (const record of file.xlsxToJson()) {
+      this.queue.add("create-pokemon", record);
+    }
+
+    return response.json({ ok: true });
   }
 }

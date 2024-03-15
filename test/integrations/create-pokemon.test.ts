@@ -14,7 +14,6 @@ describe("create-pokemon", () => {
 	const createPokemon = new CreatePokemon(prismaService);
 
 	const id = 4;
-	console.log({ id });
 
 	it("must be create a pokemon", async () => {
 		const payload: CreatePokemonDto = {

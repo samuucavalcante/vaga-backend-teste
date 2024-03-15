@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
   postgres_main:
     image: "postgres"
@@ -20,3 +20,16 @@ services:
       ALLOW_IP_RANGE: "0.0.0.0/0"
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+  redis:
+    image: redis:latest
+    restart: always
+    container_name: redis
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=your_password_here
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:

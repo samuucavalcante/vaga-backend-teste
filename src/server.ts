@@ -1,7 +1,8 @@
 import express from "express";
 import { dotenv } from "config/dotenv";
 import { appRoutes } from "./routes";
-export const app = express();
+
+const app = express();
 
 app.use(express.json());
 

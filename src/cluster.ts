@@ -1,16 +1,13 @@
 import cluster from "node:cluster";
 import os from "node:os";
 
+const cpus = os.cpus();
 if (cluster.isPrimary) {
-  const cpus = os.cpus();
-
   (async () => await import("./server"))();
 
-  for (let i = 0; i < cpus.length; i++) {
+  for (const _cpu of cpus) {
     cluster.fork();
   }
-}
-
-if (cluster.isWorker) {
+} else {
   (async () => await import("./queue"))();
 }

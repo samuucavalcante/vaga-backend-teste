@@ -7,19 +7,18 @@ export class CreatePokemon {
   public async execute(createPokemonDto: CreatePokemonDto) {
     const { status, family, ...pokemonData } = createPokemonDto;
 
-    const familyExists = await this.prismaService.family.findUnique({
-      where: { id: family.id },
-    });
-    if (!familyExists) {
-      await this.prismaService.family.create({
-        data: { id: family.id },
-      });
-    }
-
     const pokemon = await this.prismaService.pokemon.create({
       data: {
         ...pokemonData,
-        familyId: family.id,
+        new: !!pokemonData.new,
+        family: family.id
+          ? {
+            connectOrCreate: {
+              where: { id: family?.id },
+              create: {},
+            },
+          }
+          : undefined,
         status: {
           connectOrCreate: {
             where: {

@@ -1,34 +1,17 @@
-import { ExcelReader } from "node-excel-stream";
-import readline from "readline";
-import { Readable, Writable, pipeline } from "stream";
+import xlsx from "xlsx";
+
 export class FileStream {
   constructor(private readonly file: Express.Multer.File) { }
 
-  async xlsxToJson<T>(cb: (data: T) => void) {
+  *xlsxToJson() {
     const fileBuffer = this.file.buffer;
-    const readable = new Readable();
-    readable.push(fileBuffer);
-    readable.push(null);
 
-    const reader = new ExcelReader(readable, {
-      sheets: [
-        {
-          name: "Pokemons",
-          rows: {
-            headerRow: 1,
-            allowedHeaders: [
-              {
-                name: "Name",
-                key: "username",
-              },
-            ],
-          },
-        },
-      ],
-    });
+    const wb = xlsx.read(fileBuffer, { type: "buffer" });
 
-    reader.eachRow((rowData, rowNum, sheetSchema) => {
-      console.log({ rowData, rowNum, sheetSchema });
-    });
+    const sheetName = wb.SheetNames[0];
+
+    for (const record of xlsx.utils.sheet_to_json(wb.Sheets[sheetName])) {
+      yield record;
+    }
   }
 }

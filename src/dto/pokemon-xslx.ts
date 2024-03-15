@@ -1,0 +1,36 @@
+import { z } from "zod";
+
+const PokemonXlsxDtoDataSchema = z.object({
+  Row: z.number(),
+  Name: z.string(),
+  "Pokedex Number": z.number(),
+  "Img name": z.string(),
+  Generation: z.number(),
+  "Evolution Stage": z.number(),
+  Evolved: z.number(),
+  FamilyID: z.number(),
+  "Cross Gen": z.number(),
+  "Type 1": z.string(),
+  "Type 2": z.string(),
+  "Weather 1": z.string(),
+  "Weather 2": z.string(),
+  "STAT TOTAL": z.number(),
+  ATK: z.number(),
+  DEF: z.number(),
+  STA: z.number(),
+  Legendary: z.boolean(),
+  Aquireable: z.string(),
+  Spawns: z.boolean(),
+  Regional: z.boolean(),
+  Raidable: z.string(),
+  Hatchable: z.string(),
+  Shiny: z.boolean(),
+  Nest: z.boolean(),
+  New: z.boolean(),
+  "Not-Gettable": z.boolean(),
+  "Future Evolve": z.boolean(),
+  "100% CP @ 40": z.number(),
+  "100% CP @ 39": z.number(),
+});
+
+export type PokemonXlsxDto = z.infer<typeof PokemonXlsxDtoDataSchema>;

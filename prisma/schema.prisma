@@ -26,11 +26,11 @@ model Pokemon {
   weather1       Weather
   weather2       Weather
   legendary      Boolean
-  aquireable     String      @db.Char()
+  aquireable     Int         @db.SmallInt()
   spawns         Boolean
   regional       Boolean
-  raidable       String      @db.Char()
-  hatchable      String      @db.VarChar(2)
+  raidable       Int         @db.SmallInt()
+  hatchable      Int         @db.SmallInt()
   shiny          Boolean
   nest           Boolean
   new            Boolean
@@ -39,8 +39,8 @@ model Pokemon {
   cp40           Int         @db.SmallInt
   cp39           Int         @db.SmallInt
 
-  family   Family  @relation(fields: [familyId], references: [id])
-  familyId Int     @map("family_id")
+  family   Family? @relation(fields: [familyId], references: [id])
+  familyId Int?    @map("family_id")
   status   Status?
 
   @@index([name])

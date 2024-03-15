@@ -1,4 +1,5 @@
 import QueueBull, { Queue as QueueBullType } from "bull";
+import { dotenv } from "config/dotenv";
 import * as jobs from "jobs/index";
 
 type QueueModel = {
@@ -11,14 +12,17 @@ export class Queue {
   private queues: QueueModel[] = [];
 
   constructor() {
-    Object.values(jobs).forEach((Job) => {
-      const instanceOfJob = new Job();
-
-      this.queues.push({
-        bull: new QueueBull(instanceOfJob.key),
-        handle: instanceOfJob.handle,
-        queueName: instanceOfJob.key,
-      });
+    this.queues = Object.values(jobs).map((job) => {
+      return {
+        bull: new QueueBull(job.key, {
+          redis: {
+            port: dotenv.REDIS_PORT,
+            host: dotenv.REDIS_HOST,
+          },
+        }),
+        handle: job.handle,
+        queueName: job.key,
+      };
     });
   }
 
@@ -27,16 +31,14 @@ export class Queue {
       (queue) => queue.queueName === queueName,
     ) as QueueModel;
 
-    const dataToString = JSON.stringify(data);
-
-    return queue.bull.add(dataToString);
+    queue.bull.add(data);
   }
 
-  public async process() {
-    return this.queues.forEach((queue) => {
-      queue.bull.process((job) => {
-        const dataToJson = JSON.parse(job.data);
-        queue.handle(dataToJson);
+  public process() {
+    return this.queues.forEach(async (queue) => {
+      await queue.bull.process((job, done) => {
+        queue.handle(job.data);
+        done();
       });
     });
   }
