@@ -34,7 +34,5 @@ describe("Vaga Backend Teste", async () => {
     const response = await request(httpClient)
       .post(`${httpUrl}/pokemon/import-xlsx`)
       .attach("file", pokemonFilePath);
-
-    console.log(response);
   });
 });
