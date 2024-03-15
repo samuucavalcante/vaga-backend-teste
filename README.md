@@ -17,6 +17,7 @@ Esta API deverá seguir o mínimo de práticas RESTful e conter listagens, busca
 ## Consigo fazer?
 
 Consegue sim! Só precisa saber (ou aprender agora) um pouco sobre as seguintes tecnologias:
+
 - Conceitos de API RESTful
 - Modelagem de dados
 - NodeJS
