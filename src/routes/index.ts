@@ -11,10 +11,10 @@ const paginatePokemon = new PaginatePokemon(prismaService);
 const pokemonController = new PokemonController(queue, paginatePokemon);
 
 const appRoutes = Router();
-appRoutes.post("/pokemon/import-xlsx", upload.single("file"), (...n) =>
+appRoutes.post("/pokemons/import-xlsx", upload.single("file"), (...n) =>
   pokemonController.importXlsx(...n),
 );
 
-appRoutes.get("/pokemon", (...n) => pokemonController.paginatePokemon(...n));
+appRoutes.get("/pokemons", (...n) => pokemonController.paginatePokemon(...n));
 
 export { appRoutes };
