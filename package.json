@@ -11,9 +11,9 @@
     "infra:reset": "yarn infra:down && yarn infra:up",
     "dev": "yarn tsx ./src/cluster.ts",
     "test": "yarn infra:down && yarn pre:test && sleep 1 && yarn prisma db push && vitest --run --dir ./test/integrations || yarn post:test",
-    "test:e2e": "vitest --run --dir ./test/e2e/",
-    "pre:test": "docker-compose up -d postgres_test -d redis_test",
-    "post:test": "docker-compose down "
+    "test:e2e": "yarn pretest:e2e && vitest --run --dir ./test/e2e/ && yarn posttest:e2e || yarn posttest:e2e",
+    "pretest:e2e": "docker-compose up -d postgres_test -d redis_test",
+    "postest:e2e": "docker-compose down "
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

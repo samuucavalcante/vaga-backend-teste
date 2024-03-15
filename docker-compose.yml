@@ -20,6 +20,17 @@ services:
       ALLOW_IP_RANGE: "0.0.0.0/0"
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+  redis_test:
+    image: redis:latest
+    restart: always
+    container_name: redis_test
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=your_password_here
+    volumes:
+      - redis_data:/data
+
   redis:
     image: redis:latest
     restart: always
